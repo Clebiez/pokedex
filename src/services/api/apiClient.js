@@ -1,7 +1,6 @@
 import axios from 'axios';
-
 const apiClient = axios.create({
-    baseURL: 'https://pokeapi.co/api/v2',
+    baseURL: process.env.REACT_APP_API_URL,
 });
 
 export default apiClient;
