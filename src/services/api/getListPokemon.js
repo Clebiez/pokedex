@@ -1,5 +1,5 @@
 import apiClient from './apiClient';
 
-const getListPokemon = () => apiClient.get('/pokemon');
+const getListPokemon = (url = '/pokemon') => apiClient.get(url);
 
 export default getListPokemon;
