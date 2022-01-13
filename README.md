@@ -4,8 +4,8 @@ Sample project using PokéAPI to illustrate React fundamentals
 
 ## Installation
 
--   `npm install`
+-   `yarn install`
 
 ## Develop
 
--   `npm start`
+-   `yarn start`
