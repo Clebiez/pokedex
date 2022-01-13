@@ -1,7 +1,7 @@
 import getListPokemon from '../services/api/getListPokemon';
 import { useCallback, useEffect, useState } from 'react';
 import PokemonCard from '../components/PokemonCard';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import removeFavoritePokemon from '../services/fakeApi/removeFavoritePokemon';
 import addFavoritePokemon from '../services/fakeApi/addFavoritePokemon';
 
@@ -10,13 +10,10 @@ const Pokedex = () => {
     const [searchValue, setSearchValue] = useState('');
     const [nextPage, setNextPage] = useState('');
     const [previousPage, setPreviousPage] = useState('');
-    const { search } = useLocation();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    console.log(searchParams);
-
     useEffect(() => {
-        getData(`/pokemon${search}`);
+        getData(`/pokemon?${searchParams.toString()}`);
     }, []);
 
     const handleNextClick = () => {
@@ -25,7 +22,7 @@ const Pokedex = () => {
 
     const getData = useCallback(async (page) => {
         const res = await getListPokemon(page);
-        console.log(res, page);
+
         setNextPage(res.data.next);
         setPreviousPage(res.data.previous);
         setPokemons(res.data.results);

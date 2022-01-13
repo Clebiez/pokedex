@@ -9,13 +9,16 @@ const getFavoritePokemons = () => {
             });
         }
         const favorites = localStorage.getItem('favorites');
+        if (!favorites) {
+            throw new Error('Favorites is empty');
+        }
         return Promise.resolve({
             status: 200,
             data: {
                 results: JSON.parse(favorites),
             },
         });
-    } catch {
+    } catch (e) {
         return Promise.resolve({
             status: 200,
             data: {
