@@ -49,7 +49,6 @@ const Pokedex = () => {
 
     const onRemoveFavorite = async (pokemon) => {
         const res = await removeFavoritePokemon(pokemon);
-
         console.log(res);
     };
 
