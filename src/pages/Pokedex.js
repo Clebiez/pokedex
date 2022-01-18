@@ -5,6 +5,7 @@ import PokemonCard from '../components/PokemonCard';
 import { useSearchParams } from 'react-router-dom';
 import removeFavoritePokemon from '../services/fakeApi/removeFavoritePokemon';
 import addFavoritePokemon from '../services/fakeApi/addFavoritePokemon';
+import Loader from '../components/common/Loader';
 
 const Pokedex = () => {
     const [pokemons, setPokemons] = useState([]);
@@ -13,10 +14,15 @@ const Pokedex = () => {
     const [previousPage, setPreviousPage] = useState('');
     const [favPokemons, setFavPokemons] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        fetchListPokemons(`/pokemon?${searchParams.toString()}`);
-        fetchFavoritePokemons();
+        Promise.all([
+            fetchListPokemons(`/pokemon?${searchParams.toString()}`),
+            fetchFavoritePokemons(),
+        ]).finally(() => {
+            setIsLoading(false);
+        });
     }, []);
 
     const handleNextClick = () => {
@@ -68,6 +74,8 @@ const Pokedex = () => {
 
         setFavPokemons(res.data.results);
     }, []);
+
+    if (isLoading) return <Loader />;
 
     return (
         <div>
