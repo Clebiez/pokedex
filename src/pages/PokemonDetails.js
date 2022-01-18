@@ -1,6 +1,6 @@
 import { Link, useParams } from 'react-router-dom';
 import Loader from '../components/common/Loader';
-import PokemonImage from '../components/PokemonImage';
+import PokemonImage from '../components/Pokemon/PokemonImage';
 import usePokemon from '../services/hook/usePokemon';
 
 function PokemonDetails() {

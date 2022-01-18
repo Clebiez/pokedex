@@ -2,7 +2,8 @@ import ReactPropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PokemonImage from './PokemonImage';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useAuth } from '../services/provider/AuthProvider';
+import { useAuth } from '../../services/provider/AuthProvider';
+
 const regex = /https:\/\/pokeapi.co\/api\/v2\/pokemon\/|\//g;
 
 const renderFavoriteButton = ({
@@ -33,6 +34,7 @@ const renderFavoriteButton = ({
         </button>
     );
 };
+
 function PokemonCard({ pokemon, isFavorite, onAddFavorite, onRemoveFavorite }) {
     const id = pokemon.url.replace(regex, '');
     const { isLogged } = useAuth();

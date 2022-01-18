@@ -1,7 +1,7 @@
 import getListPokemon from '../services/api/getListPokemon';
 import getFavoritePokemons from '../services/fakeApi/getFavoritePokemons';
 import { useCallback, useEffect, useState } from 'react';
-import PokemonCard from '../components/PokemonCard';
+import PokemonCard from '../components/Pokemon/PokemonCard';
 import { useSearchParams } from 'react-router-dom';
 import removeFavoritePokemon from '../services/fakeApi/removeFavoritePokemon';
 import addFavoritePokemon from '../services/fakeApi/addFavoritePokemon';
@@ -62,11 +62,6 @@ const Pokedex = () => {
         // console.log(res);
     };
 
-    const isPokemonFavorite = (pokemon) => {
-        return !!favPokemons.find((favPokemon) => {
-            return favPokemon.name === pokemon.name;
-        });
-    };
     console.log(favPokemons);
 
     const fetchFavoritePokemons = useCallback(async () => {
@@ -89,20 +84,6 @@ const Pokedex = () => {
                         onChange={handleFilter}
                     />
                 </div>
-                <ul className="w-full flex flex-wrap gap-2 justify-center my-4">
-                    {pokemons?.map((pokemon) =>
-                        pokemon.name.includes(searchValue) ? (
-                            <li className="w-1/4" key={pokemon.name}>
-                                <PokemonCard
-                                    pokemon={pokemon}
-                                    onAddFavorite={onAddFavorite}
-                                    onRemoveFavorite={onRemoveFavorite}
-                                    isFavorite={isPokemonFavorite(pokemon)}
-                                />
-                            </li>
-                        ) : null
-                    )}
-                </ul>
 
                 <div className="flex items-center justify-center btn-group mt-6 m-auto">
                     <button
