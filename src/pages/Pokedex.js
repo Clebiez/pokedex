@@ -10,8 +10,10 @@ import PokemonList from '../components/Pokemon/PokemonList';
 import PokemonCard from '../components/Pokemon/PokemonCard';
 import Loader from '../components/common/Loader';
 import { AiOutlineException } from 'react-icons/ai';
+import { useAuth } from '../services/provider/AuthProvider';
 
 const Pokedex = () => {
+    const { isLogged } = useAuth();
     const [pokemons, setPokemons] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [nextPage, setNextPage] = useState('');
@@ -99,6 +101,7 @@ const Pokedex = () => {
                             onAddFavorite={onAddFavorite}
                             onRemoveFavorite={onRemoveFavorite}
                             isMaxFav={favPokemons.length >= 6}
+                            isLogged={isLogged}
                         />
                     )}
                 </PokemonList>

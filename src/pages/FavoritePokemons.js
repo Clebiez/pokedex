@@ -29,8 +29,9 @@ function FavoritePokemons(props) {
             {(pokemon) => (
                 <PokemonCard
                     pokemon={pokemon}
-                    isFavorite={true}
+                    isFavorite
                     onRemoveFavorite={onRemoveFavorite}
+                    isLogged
                 />
             )}
         </PokemonList>

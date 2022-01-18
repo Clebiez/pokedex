@@ -2,8 +2,6 @@ import ReactPropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import PokemonImage from './PokemonImage';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { useAuth } from '../../services/provider/AuthProvider';
-import propTypes from 'prop-types';
 
 const regex = /https:\/\/pokeapi.co\/api\/v2\/pokemon\/|\//g;
 
@@ -16,6 +14,7 @@ const renderFavoriteButton = ({
 }) => {
     return isFavorite === true ? (
         <button
+            data-testid={'full'}
             onClick={(e) => {
                 e.nativeEvent.stopPropagation();
                 e.preventDefault();
@@ -26,6 +25,7 @@ const renderFavoriteButton = ({
         </button>
     ) : (
         <button
+            data-testid={'empty'}
             disabled={isMaxFav}
             onClick={(e) => {
                 e.nativeEvent.stopPropagation();
@@ -38,9 +38,15 @@ const renderFavoriteButton = ({
     );
 };
 
-function PokemonCard({ pokemon, isFavorite, onAddFavorite, onRemoveFavorite, isMaxFav }) {
+function PokemonCard({
+    pokemon,
+    isFavorite,
+    onAddFavorite,
+    onRemoveFavorite,
+    isMaxFav,
+    isLogged,
+}) {
     const id = pokemon.url.replace(regex, '');
-    const { isLogged } = useAuth();
 
     return (
         <Link to={`/pokemon/${id}`}>
@@ -68,7 +74,8 @@ PokemonCard.propTypes = {
     onAddFavorite: ReactPropTypes.func,
     onRemoveFavorite: ReactPropTypes.func,
     isFavorite: ReactPropTypes.bool,
-    isMaxFav: propTypes.bool,
+    isMaxFav: ReactPropTypes.bool,
+    isLogged: ReactPropTypes.bool,
 };
 PokemonCard.defaultProps = {
     isFavorite: false,
