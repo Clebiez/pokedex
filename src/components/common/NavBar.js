@@ -1,4 +1,25 @@
 import { useAuth } from '../../services/provider/AuthProvider';
+import { Link, useResolvedPath, useMatch } from 'react-router-dom';
+import propTypes from 'prop-types';
+import classNames from 'classnames';
+
+const CustomLink = ({ to, children }) => {
+    const resolve = useResolvedPath(to);
+    const match = useMatch({ path: resolve.pathname });
+    const linkClass = classNames('btn btn-ghost btn-sm rounded-btn', {
+        'btn-active': match,
+    });
+    return (
+        <Link to={to} className={linkClass}>
+            {children}
+        </Link>
+    );
+};
+
+CustomLink.propTypes = {
+    to: propTypes.string.isRequired,
+    children: propTypes.node.isRequired,
+};
 
 const NavBar = () => {
     const { apiLogin, apiLogout, isLogged } = useAuth();
@@ -9,11 +30,9 @@ const NavBar = () => {
             </div>
             <div className="flex px-2 mx-2 navbar-center">
                 <div className="flex items-stretch">
-                    <a className="btn btn-ghost btn-sm rounded-btn">Pokédex</a>
-                    {isLogged && (
-                        <a className="btn btn-ghost btn-sm rounded-btn">Favoris</a>
-                    )}
-                    <a className="btn btn-ghost btn-sm rounded-btn">A propos</a>
+                    <CustomLink to="/">Pokédex</CustomLink>
+                    {isLogged && <CustomLink to="/favorites">Favoris</CustomLink>}
+                    <CustomLink to="/about">A propos</CustomLink>
                 </div>
             </div>
             <div className="navbar-end">
