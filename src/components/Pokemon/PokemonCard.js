@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PokemonImage from './PokemonImage';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { useAuth } from '../../services/provider/AuthProvider';
+import propTypes from 'prop-types';
 
 const regex = /https:\/\/pokeapi.co\/api\/v2\/pokemon\/|\//g;
 
@@ -11,6 +12,7 @@ const renderFavoriteButton = ({
     onRemoveFavorite,
     onAddFavorite,
     pokemon,
+    isMaxFav,
 }) => {
     return isFavorite === true ? (
         <button
@@ -24,6 +26,7 @@ const renderFavoriteButton = ({
         </button>
     ) : (
         <button
+            disabled={isMaxFav}
             onClick={(e) => {
                 e.nativeEvent.stopPropagation();
                 e.preventDefault();
@@ -35,7 +38,7 @@ const renderFavoriteButton = ({
     );
 };
 
-function PokemonCard({ pokemon, isFavorite, onAddFavorite, onRemoveFavorite }) {
+function PokemonCard({ pokemon, isFavorite, onAddFavorite, onRemoveFavorite, isMaxFav }) {
     const id = pokemon.url.replace(regex, '');
     const { isLogged } = useAuth();
 
@@ -49,6 +52,7 @@ function PokemonCard({ pokemon, isFavorite, onAddFavorite, onRemoveFavorite }) {
                         onAddFavorite,
                         onRemoveFavorite,
                         pokemon,
+                        isMaxFav,
                     })}
                 <PokemonImage id={id} />
             </div>
@@ -61,9 +65,10 @@ PokemonCard.propTypes = {
         name: ReactPropTypes.string,
         url: ReactPropTypes.string,
     }),
-    isFavorite: ReactPropTypes.bool,
     onAddFavorite: ReactPropTypes.func,
     onRemoveFavorite: ReactPropTypes.func,
+    isFavorite: ReactPropTypes.bool,
+    isMaxFav: propTypes.bool,
 };
 PokemonCard.defaultProps = {
     isFavorite: false,

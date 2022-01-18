@@ -9,6 +9,7 @@ import addFavoritePokemon from '../services/fakeApi/addFavoritePokemon';
 import PokemonList from '../components/Pokemon/PokemonList';
 import PokemonCard from '../components/Pokemon/PokemonCard';
 import Loader from '../components/common/Loader';
+import { AiOutlineException } from 'react-icons/ai';
 
 const Pokedex = () => {
     const [pokemons, setPokemons] = useState([]);
@@ -97,6 +98,7 @@ const Pokedex = () => {
                             isFavorite={isPokemonFavorite(pokemon)}
                             onAddFavorite={onAddFavorite}
                             onRemoveFavorite={onRemoveFavorite}
+                            isMaxFav={favPokemons.length >= 6}
                         />
                     )}
                 </PokemonList>

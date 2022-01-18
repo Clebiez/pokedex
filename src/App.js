@@ -5,6 +5,7 @@ import FavoritePokemons from './pages/FavoritePokemons';
 import Lab from './pages/Lab';
 import AuthProvider from './services/provider/AuthProvider';
 import Layout from './layout/Layout';
+import ProtectedRoute from './layout/RequireAuth';
 
 function App() {
     return (
@@ -14,7 +15,9 @@ function App() {
                     <Route index element={<Pokedex />} />
                     <Route path="/lab" element={<Lab />} />
                     <Route path="/pokemon/:id" element={<PokemonDetails />} />
-                    <Route path="/favorites" element={<FavoritePokemons />} />
+                    <Route element={<ProtectedRoute />}>
+                        <Route path="/favorites" element={<FavoritePokemons />} />
+                    </Route>
                 </Route>
             </Routes>
         </AuthProvider>
