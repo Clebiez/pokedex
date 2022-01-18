@@ -9,7 +9,6 @@ import addFavoritePokemon from '../services/fakeApi/addFavoritePokemon';
 import PokemonList from '../components/Pokemon/PokemonList';
 import PokemonCard from '../components/Pokemon/PokemonCard';
 import Loader from '../components/common/Loader';
-import { AiOutlineException } from 'react-icons/ai';
 import { useAuth } from '../services/provider/AuthProvider';
 
 const Pokedex = () => {

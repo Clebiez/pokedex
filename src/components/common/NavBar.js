@@ -1,7 +1,8 @@
-import { useAuth } from '../../services/provider/AuthProvider';
 import { Link, useResolvedPath, useMatch } from 'react-router-dom';
 import propTypes from 'prop-types';
 import classNames from 'classnames';
+import { useAuth } from '../../services/provider/AuthProvider';
+import useNavBarScroll from '../../services/hook/useNavBarScroll';
 
 const CustomLink = ({ to, children }) => {
     const resolve = useResolvedPath(to);
@@ -22,9 +23,15 @@ CustomLink.propTypes = {
 };
 
 const NavBar = () => {
+    const { ref } = useNavBarScroll();
+
     const { apiLogin, apiLogout, isLogged } = useAuth();
+
     return (
-        <div className="navbar z-10 fixed w-full mb-2 shadow-lg bg-neutral text-neutral-content">
+        <div
+            ref={ref}
+            className="navbar overflow-hidden z-10 fixed w-full mb-2 shadow-lg bg-neutral text-neutral-content transition-all"
+        >
             <div className="px-2 mx-2 navbar-start">
                 <span className="text-lg font-bold">Packémon</span>
             </div>
