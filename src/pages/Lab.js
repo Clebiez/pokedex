@@ -9,7 +9,7 @@ const Lab = () => {
             choices={[{ id: '1', name: 'Name' }]}
             isActive
             onClick={(param) => {
-                console.log("J'ai cliqué", param);
+                // console.log("J'ai cliqué", param);
             }}
             icon={<BiBell fontSize={12} />}
         >

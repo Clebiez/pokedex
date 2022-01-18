@@ -1,7 +1,7 @@
 import propTypes from 'prop-types';
 
 const MyComponent = (props) => {
-    console.log(props);
+    // console.log(props);
 
     const handleClick = () => {
         props.onClick('Michel');

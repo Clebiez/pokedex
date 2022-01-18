@@ -1,10 +1,13 @@
+import { useSearchParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
+
 import getListPokemon from '../services/api/getListPokemon';
 import getFavoritePokemons from '../services/fakeApi/getFavoritePokemons';
-import { useCallback, useEffect, useState } from 'react';
-import PokemonCard from '../components/Pokemon/PokemonCard';
-import { useSearchParams } from 'react-router-dom';
 import removeFavoritePokemon from '../services/fakeApi/removeFavoritePokemon';
 import addFavoritePokemon from '../services/fakeApi/addFavoritePokemon';
+
+import PokemonList from '../components/Pokemon/PokemonList';
+import PokemonCard from '../components/Pokemon/PokemonCard';
 import Loader from '../components/common/Loader';
 
 const Pokedex = () => {
@@ -62,16 +65,19 @@ const Pokedex = () => {
         // console.log(res);
     };
 
-    console.log(favPokemons);
-
     const fetchFavoritePokemons = useCallback(async () => {
         const res = await getFavoritePokemons();
 
         setFavPokemons(res.data.results);
     }, []);
 
-    if (isLoading) return <Loader />;
+    const isPokemonFavorite = (pokemon) => {
+        return !!favPokemons?.find((favPokemon) => {
+            return favPokemon.name === pokemon.name;
+        });
+    };
 
+    if (isLoading) return <Loader />;
     return (
         <div>
             <h1 className="text-4xl font-extrabold text-center">Pokedex</h1>
@@ -84,6 +90,16 @@ const Pokedex = () => {
                         onChange={handleFilter}
                     />
                 </div>
+                <PokemonList pokemons={pokemons} searchValue={searchValue}>
+                    {(pokemon) => (
+                        <PokemonCard
+                            pokemon={pokemon}
+                            isFavorite={isPokemonFavorite(pokemon)}
+                            onAddFavorite={onAddFavorite}
+                            onRemoveFavorite={onRemoveFavorite}
+                        />
+                    )}
+                </PokemonList>
 
                 <div className="flex items-center justify-center btn-group mt-6 m-auto">
                     <button
