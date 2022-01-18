@@ -1,4 +1,5 @@
 import getListPokemon from '../services/api/getListPokemon';
+import getFavoritePokemons from '../services/fakeApi/getFavoritePokemons';
 import { useCallback, useEffect, useState } from 'react';
 import PokemonCard from '../components/PokemonCard';
 import { useSearchParams } from 'react-router-dom';
@@ -10,17 +11,19 @@ const Pokedex = () => {
     const [searchValue, setSearchValue] = useState('');
     const [nextPage, setNextPage] = useState('');
     const [previousPage, setPreviousPage] = useState('');
+    const [favPokemons, setFavPokemons] = useState([]);
     const [searchParams, setSearchParams] = useSearchParams();
 
     useEffect(() => {
-        getData(`/pokemon?${searchParams.toString()}`);
+        fetchListPokemons(`/pokemon?${searchParams.toString()}`);
+        fetchFavoritePokemons();
     }, []);
 
     const handleNextClick = () => {
-        if (nextPage) getData(nextPage);
+        if (nextPage) fetchListPokemons(nextPage);
     };
 
-    const getData = useCallback(async (page) => {
+    const fetchListPokemons = useCallback(async (page) => {
         const res = await getListPokemon(page);
 
         setNextPage(res.data.next);
@@ -35,7 +38,7 @@ const Pokedex = () => {
     }, []);
 
     const handlePreviousClick = () => {
-        if (previousPage) getData(previousPage);
+        if (previousPage) fetchListPokemons(previousPage);
     };
 
     const handleFilter = (e) => {
@@ -43,15 +46,28 @@ const Pokedex = () => {
     };
 
     const onAddFavorite = async (pokemon) => {
-        const res = await addFavoritePokemon(pokemon);
-        console.log(res);
+        await addFavoritePokemon(pokemon);
+        fetchFavoritePokemons();
     };
 
     const onRemoveFavorite = async (pokemon) => {
-        const res = await removeFavoritePokemon(pokemon);
-
-        console.log(res);
+        await removeFavoritePokemon(pokemon);
+        fetchFavoritePokemons();
+        // console.log(res);
     };
+
+    const isPokemonFavorite = (pokemon) => {
+        return !!favPokemons.find((favPokemon) => {
+            return favPokemon.name === pokemon.name;
+        });
+    };
+    console.log(favPokemons);
+
+    const fetchFavoritePokemons = useCallback(async () => {
+        const res = await getFavoritePokemons();
+
+        setFavPokemons(res.data.results);
+    }, []);
 
     return (
         <div>
@@ -73,6 +89,7 @@ const Pokedex = () => {
                                     pokemon={pokemon}
                                     onAddFavorite={onAddFavorite}
                                     onRemoveFavorite={onRemoveFavorite}
+                                    isFavorite={isPokemonFavorite(pokemon)}
                                 />
                             </li>
                         ) : null
