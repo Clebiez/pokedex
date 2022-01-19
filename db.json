@@ -1,0 +1,40 @@
+{
+  "teams": [
+    {
+      "id": 1,
+      "name": "Ma Team 1",
+      "createdAt": "01-19-2022",
+      "category": "Fight",
+      "pokemons": [
+        {
+          "name": "ivysaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/2/"
+        },
+        {
+          "name": "charmeleon",
+          "url": "https://pokeapi.co/api/v2/pokemon/5/"
+        },
+        {
+          "name": "metapod",
+          "url": "https://pokeapi.co/api/v2/pokemon/11/"
+        },
+        {
+          "name": "clefairy",
+          "url": "https://pokeapi.co/api/v2/pokemon/35/"
+        },
+        {
+          "name": "ninetales",
+          "url": "https://pokeapi.co/api/v2/pokemon/38/"
+        },
+        {
+          "name": "wigglytuff",
+          "url": "https://pokeapi.co/api/v2/pokemon/40/"
+        }
+      ]
+    },
+    {
+      "name": "Team 2",
+      "id": 2
+    }
+  ]
+}
