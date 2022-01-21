@@ -1,5 +1,6 @@
 import getTeamList from '../services/api/getTeamList';
 import { useEffect, useState } from 'react';
+import PokemonCard from '../components/Pokemon/PokemonCard';
 
 function PokemonTeams() {
     const [teams, setTeams] = useState([]);
@@ -12,13 +13,34 @@ function PokemonTeams() {
     }, []);
     return (
         <div className="flex flex-col justify-around items-center">
-            <h1>My teams</h1>
+            <h1 className="text-4xl">My teams</h1>
             <button className="btn btn-primary">Create new team</button>
             <ul>
                 {teams?.map((team) => {
                     return (
-                        <li key={team.id}>
-                            <h2>{team.name}</h2>
+                        <li
+                            key={team.id}
+                            className="border-2 border-white rounded-lg my-4 p-4 bg-gray-800"
+                        >
+                            <div className="flex justify-between items-center">
+                                <h2 className="text-2xl">
+                                    {team.name} ({team.category})
+                                </h2>
+                                <p>created at: {team.createdAt}</p>
+                            </div>
+
+                            <ul className="flex gap-2">
+                                {team.pokemons?.map((pokemon) => {
+                                    return (
+                                        <li
+                                            key={`${team.id}-${pokemon.name}`}
+                                            className="w-1/6 pt-4"
+                                        >
+                                            <PokemonCard pokemon={pokemon} />
+                                        </li>
+                                    );
+                                })}
+                            </ul>
                         </li>
                     );
                 })}

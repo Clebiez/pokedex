@@ -53,7 +53,7 @@ function PokemonCard({
 
     return (
         <Link to={`/pokemon/${id}`}>
-            <div className="relative w-full rounded-md bg-pink-400 pb-8">
+            <div className="relative w-full rounded-md bg-pink-400 p-4">
                 <h2 className="w-full text-center">{pokemon.name}</h2>
                 {isLogged &&
                     renderFavoriteButton({
