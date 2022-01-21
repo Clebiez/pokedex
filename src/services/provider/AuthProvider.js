@@ -9,12 +9,10 @@ function AuthProvider({ children }) {
     const apiLogin = () => {
         login();
         setIsLogged(true);
-        console.log(isLogged);
     };
     const apiLogout = () => {
         logout();
         setIsLogged(false);
-        console.log(isLogged);
     };
     return (
         <AuthContext.Provider value={{ isLogged, apiLogin, apiLogout }}>

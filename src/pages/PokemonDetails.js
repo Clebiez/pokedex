@@ -1,6 +1,7 @@
 import { Link, useParams } from 'react-router-dom';
 import Loader from '../components/common/Loader';
 import PokemonImage from '../components/Pokemon/PokemonImage';
+import PokemonTypes from '../components/Pokemon/PokemonTypes';
 import usePokemon from '../services/hook/usePokemon';
 
 function PokemonDetails() {
@@ -19,18 +20,7 @@ function PokemonDetails() {
                         {pokemon?.name}
                     </h1>
                     <PokemonImage id={id} />
-                    <ul className="w-full flex justify-center gap-2">
-                        {pokemon?.types.map(({ type }) => {
-                            return (
-                                <li
-                                    className="text-black bg-pink-200 py-1 px-2 rounded-lg"
-                                    key={type.name}
-                                >
-                                    {type.name}
-                                </li>
-                            );
-                        })}
-                    </ul>
+                    <PokemonTypes types={pokemon.types} />
                 </>
             )}
         </>

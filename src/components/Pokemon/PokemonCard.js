@@ -1,7 +1,9 @@
 import ReactPropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import PokemonImage from './PokemonImage';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import usePokemon from '../../services/hook/usePokemon';
+import PokemonImage from './PokemonImage';
+import PokemonTypes from './PokemonTypes';
 
 const regex = /https:\/\/pokeapi.co\/api\/v2\/pokemon\/|\//g;
 
@@ -47,10 +49,11 @@ function PokemonCard({
     isLogged,
 }) {
     const id = pokemon.url.replace(regex, '');
+    const { pokemon: pokemonDetails } = usePokemon(id);
 
     return (
         <Link to={`/pokemon/${id}`}>
-            <div className="relative w-full rounded-md bg-pink-400">
+            <div className="relative w-full rounded-md bg-pink-400 pb-8">
                 <h2 className="w-full text-center">{pokemon.name}</h2>
                 {isLogged &&
                     renderFavoriteButton({
@@ -61,6 +64,7 @@ function PokemonCard({
                         isMaxFav,
                     })}
                 <PokemonImage id={id} />
+                <PokemonTypes types={pokemonDetails?.types} />
             </div>
         </Link>
     );
@@ -70,6 +74,9 @@ PokemonCard.propTypes = {
     pokemon: ReactPropTypes.shape({
         name: ReactPropTypes.string,
         url: ReactPropTypes.string,
+        types: ReactPropTypes.arrayOf({
+            name: ReactPropTypes.string,
+        }),
     }),
     onAddFavorite: ReactPropTypes.func,
     onRemoveFavorite: ReactPropTypes.func,

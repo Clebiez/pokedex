@@ -2,8 +2,6 @@ import NavBar from '../components/common/NavBar';
 import { Outlet } from 'react-router-dom';
 
 const Layout = (props) => {
-    console.log(props);
-
     return (
         <div>
             <NavBar />
