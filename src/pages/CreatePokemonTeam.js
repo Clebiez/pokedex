@@ -2,13 +2,25 @@
 // import { useForm } from 'react-hook-form';
 
 import { useForm } from 'react-hook-form';
+import { useState } from 'react/cjs/react.development';
+import Pokedex from '../components/Pokemon/Pokedex';
+import ToggleTeamButton from '../components/Pokemon/ToggleTeamButton';
 import createTeam from '../services/api/createTeam';
 
 const CreatePokemonTeam = () => {
     const { register, handleSubmit } = useForm();
+    const [team, setTeam] = useState([]);
 
     const onSubmit = (data) => {
         createTeam(data);
+    };
+
+    const addToTeam = (pokemon) => {
+        setTeam([...team, pokemon]);
+    };
+
+    const removeFromTeam = (pokemon) => {
+        setTeam(team.filter((pokemonInArr) => pokemon.name === pokemonInArr.name));
     };
 
     return (
@@ -37,6 +49,16 @@ const CreatePokemonTeam = () => {
                     Save
                 </button>
             </form>
+            <Pokedex
+                pokemonCardFooter={
+                    <ToggleTeamButton
+                        isInTeam={isPokemonInTeam}
+                        onRemoveFromTeam={removeFromTeam}
+                        onAddToTeam={addToTeam}
+                        pokemon={pokemon}
+                    />
+                }
+            />
         </div>
     );
 };

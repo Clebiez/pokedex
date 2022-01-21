@@ -1,9 +1,10 @@
-import ReactPropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import usePokemon from '../../services/hook/usePokemon';
 import PokemonImage from './PokemonImage';
 import PokemonTypes from './PokemonTypes';
+import pokemonPropTypes from '../../propTypes/pokemonPropTypes';
 
 const regex = /https:\/\/pokeapi.co\/api\/v2\/pokemon\/|\//g;
 
@@ -47,6 +48,7 @@ function PokemonCard({
     onRemoveFavorite,
     isMaxFav,
     isLogged,
+    footer,
 }) {
     const id = pokemon.url.replace(regex, '');
     const { pokemon: pokemonDetails } = usePokemon(id);
@@ -65,24 +67,20 @@ function PokemonCard({
                     })}
                 <PokemonImage id={id} />
                 <PokemonTypes types={pokemonDetails?.types} />
+                {footer}
             </div>
         </Link>
     );
 }
 
 PokemonCard.propTypes = {
-    pokemon: ReactPropTypes.shape({
-        name: ReactPropTypes.string,
-        url: ReactPropTypes.string,
-        types: ReactPropTypes.arrayOf({
-            name: ReactPropTypes.string,
-        }),
-    }),
-    onAddFavorite: ReactPropTypes.func,
-    onRemoveFavorite: ReactPropTypes.func,
-    isFavorite: ReactPropTypes.bool,
-    isMaxFav: ReactPropTypes.bool,
-    isLogged: ReactPropTypes.bool,
+    pokemon: pokemonPropTypes,
+    onAddFavorite: PropTypes.func,
+    onRemoveFavorite: PropTypes.func,
+    isFavorite: PropTypes.bool,
+    isMaxFav: PropTypes.bool,
+    isLogged: PropTypes.bool,
+    footer: PropTypes.element,
 };
 PokemonCard.defaultProps = {
     isFavorite: false,
