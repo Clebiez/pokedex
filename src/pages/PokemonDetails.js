@@ -1,4 +1,5 @@
 import { Link, useParams } from 'react-router-dom';
+
 import Loader from '../components/common/Loader';
 import PokemonImage from '../components/Pokemon/PokemonImage';
 import PokemonTypes from '../components/Pokemon/PokemonTypes';

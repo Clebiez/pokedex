@@ -1,50 +1,29 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import getListPokemon from '../../services/pokeApi/getListPokemon';
-import addFavoritePokemon from '../../services/fakeApi/addFavoritePokemon';
-import removeFavoritePokemon from '../../services/fakeApi/removeFavoritePokemon';
-import getFavoritePokemons from '../../services/fakeApi/getFavoritePokemons';
 
 import PokemonList from './PokemonList';
 import PokemonCard from './PokemonCard';
 import Loader from '../common/Loader';
 import { useAuth } from '../../services/provider/AuthProvider';
+import { useQuery } from 'react-query';
+import useFavorites from '../../services/hook/useFavorites';
 
 const Pokedex = ({ searchParams, setSearchParams, pokemonCardFooter }) => {
     const { isLogged } = useAuth();
-    const [pokemons, setPokemons] = useState([]);
-    const [favPokemons, setFavPokemons] = useState([]);
+
+    const { favorites: favPokemons, onAddFavorite, onRemoveFavorite } = useFavorites();
+    const { data, isLoading } = useQuery(
+        ['pokemons', searchParams],
+        () => getListPokemon(`/pokemon?${searchParams}`),
+        { keepPreviousData: true }
+    );
+    const pokemons = data?.data?.results;
+    const nextPage = data?.data?.next;
+    const previousPage = data?.data?.previous;
+
     const [searchValue, setSearchValue] = useState('');
-    const [nextPage, setNextPage] = useState('');
-    const [previousPage, setPreviousPage] = useState('');
-    const [isLoading, setIsLoading] = useState(true);
-
-    useEffect(() => {
-        Promise.all([
-            fetchListPokemons(`/pokemon?${searchParams}`),
-            fetchFavoritePokemons(),
-        ]).finally(() => {
-            setIsLoading(false);
-        });
-    }, []);
-
-    const onAddFavorite = async (pokemon) => {
-        await addFavoritePokemon(pokemon);
-        fetchFavoritePokemons();
-    };
-
-    const onRemoveFavorite = async (pokemon) => {
-        await removeFavoritePokemon(pokemon);
-        fetchFavoritePokemons();
-        // console.log(res);
-    };
-
-    const fetchFavoritePokemons = useCallback(async () => {
-        const res = await getFavoritePokemons();
-
-        setFavPokemons(res.data.results);
-    }, []);
 
     const isPokemonFavorite = (pokemon) => {
         return !!favPokemons?.find((favPokemon) => {
@@ -52,26 +31,9 @@ const Pokedex = ({ searchParams, setSearchParams, pokemonCardFooter }) => {
         });
     };
 
-    const handleNextClick = () => {
-        if (nextPage) fetchListPokemons(nextPage);
-    };
-
-    const fetchListPokemons = useCallback(async (page) => {
-        const res = await getListPokemon(page);
-
-        setNextPage(res.data.next);
-        setPreviousPage(res.data.previous);
-        setPokemons(res.data.results);
-        try {
-            const url = new URL(page);
-            setSearchParams(url.search);
-        } catch {
-            return null;
-        }
-    }, []);
-
-    const handlePreviousClick = () => {
-        if (previousPage) fetchListPokemons(previousPage);
+    const handleChangePage = (page) => {
+        const url = new URL(page);
+        setSearchParams(url.search);
     };
 
     const handleFilter = (e) => {
@@ -107,14 +69,14 @@ const Pokedex = ({ searchParams, setSearchParams, pokemonCardFooter }) => {
                 <div className="flex items-center justify-center btn-group mt-6 m-auto">
                     <button
                         className="btn btn-outline btn-wide"
-                        onClick={handlePreviousClick}
+                        onClick={() => handleChangePage(previousPage)}
                         disabled={!previousPage}
                     >
                         Page précédente
                     </button>
                     <button
                         className="btn btn-outline btn-wide"
-                        onClick={handleNextClick}
+                        onClick={() => handleChangePage(nextPage)}
                         disabled={!nextPage}
                     >
                         Page suivante

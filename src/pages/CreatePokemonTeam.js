@@ -1,19 +1,25 @@
-// import PropTypes from 'prop-types';
-// import { useForm } from 'react-hook-form';
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react/cjs/react.development';
+import { useMutation, useQueryClient } from 'react-query';
 import Pokedex from '../components/Pokemon/Pokedex';
 import ToggleTeamButton from '../components/Pokemon/ToggleTeamButton';
 import createTeam from '../services/api/createTeam';
 
 const CreatePokemonTeam = () => {
+    const navigate = useNavigate();
+    const queryClient = useQueryClient();
+    const createTeamMutation = useMutation(createTeam, {
+        onSuccess: () => {
+            queryClient.invalidateQueries('teams');
+            navigate('/teams');
+        },
+    });
     const { register, handleSubmit } = useForm();
     const [team, setTeam] = useState([]);
-
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         data.pokemons = team;
-        createTeam(data);
+        createTeamMutation.mutate(data);
     };
 
     const onAddToTeam = (pokemon) => {
@@ -26,6 +32,7 @@ const CreatePokemonTeam = () => {
 
     return (
         <div className="flex flex-col justify-around items-center max-w-screen-lg mx-auto">
+            {createTeamMutation.isSuccess && <h2>La team a été sauvegardée</h2>}
             <h1 className="text-4xl">New team !</h1>
             <form className="flex flex-col gap-4 w-80" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control my-4">

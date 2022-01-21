@@ -1,16 +1,12 @@
 import getPokemon from '../pokeApi/getPokemon';
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 
 function usePokemon(id) {
-    const [pokemon, setPokemon] = useState();
-    useEffect(() => {
-        const getData = async () => {
-            const res = await getPokemon(id);
-            setPokemon(res.data);
-        };
-        getData();
-    }, []);
-    return { pokemon, isLoading: !pokemon };
+    const { data, isLoading } = useQuery(['pokemons', id], () => getPokemon(id), {
+        staleTime: Infinity,
+    });
+
+    return { pokemon: data, isLoading };
 }
 
 export default usePokemon;

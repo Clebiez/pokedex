@@ -97,6 +97,174 @@
       ],
       "createdAt": "2022-01-21T13:34:53.091Z",
       "id": 8
+    },
+    {
+      "name": "Mich2el",
+      "category": "fight",
+      "pokemons": [
+        {
+          "name": "bulbasaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        }
+      ],
+      "createdAt": "2022-01-21T13:38:59.006Z",
+      "id": 9
+    },
+    {
+      "name": "Michel3",
+      "category": "fight",
+      "pokemons": [
+        {
+          "name": "bulbasaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        },
+        {
+          "name": "charmander",
+          "url": "https://pokeapi.co/api/v2/pokemon/4/"
+        },
+        {
+          "name": "squirtle",
+          "url": "https://pokeapi.co/api/v2/pokemon/7/"
+        },
+        {
+          "name": "caterpie",
+          "url": "https://pokeapi.co/api/v2/pokemon/10/"
+        },
+        {
+          "name": "weedle",
+          "url": "https://pokeapi.co/api/v2/pokemon/13/"
+        },
+        {
+          "name": "pidgey",
+          "url": "https://pokeapi.co/api/v2/pokemon/16/"
+        }
+      ],
+      "createdAt": "2022-01-21T13:40:18.024Z",
+      "id": 10
+    },
+    {
+      "name": "Michel3",
+      "category": "fight",
+      "pokemons": [
+        {
+          "name": "bulbasaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        },
+        {
+          "name": "ivysaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/2/"
+        },
+        {
+          "name": "charmeleon",
+          "url": "https://pokeapi.co/api/v2/pokemon/5/"
+        },
+        {
+          "name": "charizard",
+          "url": "https://pokeapi.co/api/v2/pokemon/6/"
+        }
+      ],
+      "createdAt": "2022-01-21T13:40:44.268Z",
+      "id": 11
+    },
+    {
+      "name": "Mutation",
+      "category": "farm",
+      "pokemons": [
+        {
+          "name": "bulbasaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        },
+        {
+          "name": "ivysaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/2/"
+        },
+        {
+          "name": "venusaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/3/"
+        }
+      ],
+      "createdAt": "2022-01-21T14:41:30.927Z",
+      "id": 12
+    },
+    {
+      "name": "Mutation",
+      "category": "farm",
+      "pokemons": [
+        {
+          "name": "bulbasaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        },
+        {
+          "name": "ivysaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/2/"
+        },
+        {
+          "name": "venusaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/3/"
+        }
+      ],
+      "createdAt": "2022-01-21T14:41:54.820Z",
+      "id": 13
+    },
+    {
+      "name": "Mutation",
+      "category": "farm",
+      "pokemons": [
+        {
+          "name": "bulbasaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        },
+        {
+          "name": "ivysaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/2/"
+        },
+        {
+          "name": "venusaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/3/"
+        }
+      ],
+      "createdAt": "2022-01-21T14:41:55.492Z",
+      "id": 14
+    },
+    {
+      "name": "Michel3",
+      "category": "fight",
+      "pokemons": [
+        {
+          "name": "bulbasaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        },
+        {
+          "name": "ivysaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/2/"
+        }
+      ],
+      "createdAt": "2022-01-21T14:43:55.012Z",
+      "id": 15
+    },
+    {
+      "name": "FRESH",
+      "category": "fight",
+      "pokemons": [
+        {
+          "name": "bulbasaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        }
+      ],
+      "createdAt": "2022-01-21T14:48:11.001Z",
+      "id": 16
+    },
+    {
+      "name": "CEST FRESH",
+      "category": "fight",
+      "pokemons": [
+        {
+          "name": "charizard",
+          "url": "https://pokeapi.co/api/v2/pokemon/6/"
+        }
+      ],
+      "createdAt": "2022-01-21T14:49:36.780Z",
+      "id": 17
     }
   ]
 }

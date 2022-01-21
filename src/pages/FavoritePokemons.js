@@ -1,28 +1,9 @@
-import { useState, useEffect, useCallback } from 'react';
-import getFavoritePokemons from '../services/fakeApi/getFavoritePokemons';
-import removeFavoritePokemon from '../services/fakeApi/removeFavoritePokemon';
-
 import PokemonList from '../components/Pokemon/PokemonList';
 import PokemonCard from '../components/Pokemon/PokemonCard';
+import useFavorites from '../services/hook/useFavorites';
 
 function FavoritePokemons(props) {
-    const [favorites, setFavorites] = useState([]);
-
-    useEffect(() => {
-        fetchFavoritePokemons();
-    }, []);
-
-    const onRemoveFavorite = async (pokemon) => {
-        await removeFavoritePokemon(pokemon);
-        fetchFavoritePokemons();
-        // console.log(res);
-    };
-
-    const fetchFavoritePokemons = useCallback(async () => {
-        const res = await getFavoritePokemons();
-
-        setFavorites(res.data.results);
-    }, []);
+    const { favorites, onRemoveFavorite } = useFavorites();
 
     return (
         <PokemonList pokemons={favorites}>

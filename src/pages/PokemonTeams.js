@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 import getTeamList from '../services/api/getTeamList';
@@ -6,14 +7,14 @@ import getTeamList from '../services/api/getTeamList';
 import PokemonCard from '../components/Pokemon/PokemonCard';
 
 function PokemonTeams() {
-    const [teams, setTeams] = useState([]);
-    useEffect(() => {
-        const fetchTeams = async () => {
-            const res = await getTeamList();
-            setTeams(res.data);
-        };
-        fetchTeams();
-    }, []);
+    const { data: teams } = useQuery(
+        'teams',
+        () => getTeamList().then((res) => res.data),
+        {
+            staleTime: Infinity,
+        }
+    );
+
     return (
         <div className="flex flex-col justify-around items-center max-w-screen-lg mx-auto">
             <h1 className="text-4xl">My teams</h1>
@@ -32,7 +33,9 @@ function PokemonTeams() {
                                     {team.name} ({team.category})
                                 </h2>
                                 <p>
-                                    Created at: {format(new Date(team.createdAt), 'PP')}
+                                    Created at:{' '}
+                                    {team.createdAt &&
+                                        format(new Date(team.createdAt), 'PP')}
                                 </p>
                             </div>
 
