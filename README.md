@@ -9,3 +9,7 @@ Sample project using PokéAPI to illustrate React fundamentals
 ## Develop
 
 -   `yarn start`
+
+or
+
+-   `npm run start-npm`
