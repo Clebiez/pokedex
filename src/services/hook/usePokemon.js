@@ -1,4 +1,4 @@
-import getPokemon from '../api/getPokemon';
+import getPokemon from '../pokeApi/getPokemon';
 import { useEffect, useState } from 'react';
 
 function usePokemon(id) {

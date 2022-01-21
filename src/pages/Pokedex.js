@@ -1,7 +1,7 @@
 import { useSearchParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
-import getListPokemon from '../services/api/getListPokemon';
+import getListPokemon from '../services/pokeApi/getListPokemon';
 import getFavoritePokemons from '../services/fakeApi/getFavoritePokemons';
 import removeFavoritePokemon from '../services/fakeApi/removeFavoritePokemon';
 import addFavoritePokemon from '../services/fakeApi/addFavoritePokemon';

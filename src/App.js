@@ -6,6 +6,7 @@ import Lab from './pages/Lab';
 import AuthProvider from './services/provider/AuthProvider';
 import Layout from './layout/Layout';
 import ProtectedRoute from './layout/RequireAuth';
+import PokemonTeams from './pages/PokemonTeams';
 
 function App() {
     return (
@@ -17,6 +18,7 @@ function App() {
                     <Route path="/pokemon/:id" element={<PokemonDetails />} />
                     <Route element={<ProtectedRoute />}>
                         <Route path="/favorites" element={<FavoritePokemons />} />
+                        <Route path="/teams" element={<PokemonTeams />} />
                     </Route>
                 </Route>
             </Routes>

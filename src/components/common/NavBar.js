@@ -38,7 +38,12 @@ const NavBar = () => {
             <div className="flex px-2 mx-2 navbar-center">
                 <div className="flex items-stretch">
                     <CustomLink to="/">Pokédex</CustomLink>
-                    {isLogged && <CustomLink to="/favorites">Favoris</CustomLink>}
+                    {isLogged && (
+                        <>
+                            <CustomLink to="/favorites">Favoris</CustomLink>
+                            <CustomLink to="/teams">My teams</CustomLink>
+                        </>
+                    )}
                     <CustomLink to="/about">A propos</CustomLink>
                 </div>
             </div>
