@@ -1,8 +1,7 @@
 import apiClient from './apiClient';
 
 const createTeam = (team) => {
-    team.createdAt = new Date(Date.now()).toLocaleDateString();
-    return apiClient.post('/teams', team);
+    return apiClient.post('/teams', { ...team, createdAt: new Date().toISOString() });
 };
 
 export default createTeam;

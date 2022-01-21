@@ -14,7 +14,7 @@ const CreatePokemonTeam = () => {
     return (
         <div className="flex flex-col justify-around items-center max-w-screen-lg mx-auto">
             <h1 className="text-4xl">New team !</h1>
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className="flex flex-col gap-4 w-80" onSubmit={handleSubmit(onSubmit)}>
                 <div className="form-control my-4">
                     <label className="label" htmlFor="name">
                         Name

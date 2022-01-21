@@ -1,7 +1,9 @@
-import getTeamList from '../services/api/getTeamList';
 import { useEffect, useState } from 'react';
-import PokemonCard from '../components/Pokemon/PokemonCard';
 import { Link } from 'react-router-dom';
+import format from 'date-fns/format';
+import getTeamList from '../services/api/getTeamList';
+
+import PokemonCard from '../components/Pokemon/PokemonCard';
 
 function PokemonTeams() {
     const [teams, setTeams] = useState([]);
@@ -29,7 +31,9 @@ function PokemonTeams() {
                                 <h2 className="text-2xl">
                                     {team.name} ({team.category})
                                 </h2>
-                                <p>created at: {team.createdAt}</p>
+                                <p>
+                                    Created at: {format(new Date(team.createdAt), 'PP')}
+                                </p>
                             </div>
 
                             <ul className="flex gap-2">
