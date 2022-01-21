@@ -12,4 +12,4 @@ Sample project using PokéAPI to illustrate React fundamentals
 
 or
 
--   `npm run start-npm` to start with NPM
+<!-- -   `npm run start-npm` to start with NPM -->
