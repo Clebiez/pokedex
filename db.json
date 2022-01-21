@@ -35,6 +35,24 @@
     {
       "name": "Team 2",
       "id": 2
+    },
+    {
+      "name": "coco",
+      "category": "fight",
+      "createdAt": 1642761689943,
+      "id": 3
+    },
+    {
+      "name": "adélie",
+      "category": "fight",
+      "createdAt": 1642761832084,
+      "id": 4
+    },
+    {
+      "name": "Clément",
+      "category": "fight",
+      "createdAt": "21/01/2022",
+      "id": 5
     }
   ]
 }

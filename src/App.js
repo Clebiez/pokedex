@@ -7,6 +7,7 @@ import AuthProvider from './services/provider/AuthProvider';
 import Layout from './layout/Layout';
 import ProtectedRoute from './layout/RequireAuth';
 import PokemonTeams from './pages/PokemonTeams';
+import CreatePokemonTeam from './pages/CreatePokemonTeam';
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route element={<ProtectedRoute />}>
                         <Route path="/favorites" element={<FavoritePokemons />} />
                         <Route path="/teams" element={<PokemonTeams />} />
+                        <Route path="/teams/create" element={<CreatePokemonTeam />} />
                     </Route>
                 </Route>
             </Routes>
