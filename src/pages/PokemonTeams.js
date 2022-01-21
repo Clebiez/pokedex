@@ -1,19 +1,45 @@
-import { useQuery } from 'react-query';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { Link } from 'react-router-dom';
 import format from 'date-fns/format';
 import getTeamList from '../services/api/getTeamList';
 
 import PokemonCard from '../components/Pokemon/PokemonCard';
+import { FaTrash } from 'react-icons/fa';
+import { deleteTeam } from '../services/api/deleteTeam';
 
 function PokemonTeams() {
-    const { data: teams } = useQuery(
+    const queryClient = useQueryClient();
+    const { data: teams, refetch } = useQuery(
         'teams',
         () => getTeamList().then((res) => res.data),
         {
             staleTime: Infinity,
         }
     );
+
+    const deletedMutation = useMutation(deleteTeam, {
+        onMutate: async (id) => {
+            // Cancel any outgoing refetches (so they don't overwrite our optimistic update)
+            await queryClient.cancelQueries('teams');
+
+            // Snapshot the previous value
+            const previousTeams = queryClient.getQueryData('teams');
+
+            // Optimistically update to the new value
+            queryClient.setQueryData('teams', (old) =>
+                old.filter((team) => team.id !== id)
+            );
+
+            // Return a context object with the snapshotted value
+            return { previousTeams };
+        },
+        onSettled: refetch,
+    });
+
+    const onDeleteTeam = (id) => {
+        deletedMutation.mutate(id);
+    };
 
     return (
         <div className="flex flex-col justify-around items-center max-w-screen-lg mx-auto">
@@ -37,6 +63,12 @@ function PokemonTeams() {
                                     {team.createdAt &&
                                         format(new Date(team.createdAt), 'PP')}
                                 </p>
+                                <button
+                                    className="bg-gradient-to-l rounded-lg shadow text-white p-5"
+                                    onClick={() => onDeleteTeam(team.id)}
+                                >
+                                    <FaTrash />
+                                </button>
                             </div>
 
                             <ul className="flex gap-2">
