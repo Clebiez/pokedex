@@ -67,7 +67,7 @@ function PokemonCard({
                     })}
                 <PokemonImage id={id} />
                 <PokemonTypes types={pokemonDetails?.types} />
-                {footer}
+                {footer && footer(pokemon)}
             </div>
         </Link>
     );
@@ -80,7 +80,7 @@ PokemonCard.propTypes = {
     isFavorite: PropTypes.bool,
     isMaxFav: PropTypes.bool,
     isLogged: PropTypes.bool,
-    footer: PropTypes.element,
+    footer: PropTypes.func,
 };
 PokemonCard.defaultProps = {
     isFavorite: false,

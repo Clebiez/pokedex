@@ -49,6 +49,54 @@
       "category": "style-contest",
       "createdAt": "2022-01-21T10:51:53.193Z",
       "id": 6
+    },
+    {
+      "name": "test",
+      "category": "fight",
+      "pokemons": [
+        {
+          "name": "beedrill",
+          "url": "https://pokeapi.co/api/v2/pokemon/15/"
+        },
+        {
+          "name": "charmander",
+          "url": "https://pokeapi.co/api/v2/pokemon/4/"
+        },
+        {
+          "name": "charmeleon",
+          "url": "https://pokeapi.co/api/v2/pokemon/5/"
+        },
+        {
+          "name": "charizard",
+          "url": "https://pokeapi.co/api/v2/pokemon/6/"
+        },
+        {
+          "name": "squirtle",
+          "url": "https://pokeapi.co/api/v2/pokemon/7/"
+        }
+      ],
+      "createdAt": "2022-01-21T13:26:02.735Z",
+      "id": 7
+    },
+    {
+      "name": "test2",
+      "category": "fight",
+      "pokemons": [
+        {
+          "name": "bulbasaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/1/"
+        },
+        {
+          "name": "ivysaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/2/"
+        },
+        {
+          "name": "venusaur",
+          "url": "https://pokeapi.co/api/v2/pokemon/3/"
+        }
+      ],
+      "createdAt": "2022-01-21T13:34:53.091Z",
+      "id": 8
     }
   ]
 }

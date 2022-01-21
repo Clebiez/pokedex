@@ -128,7 +128,7 @@ const Pokedex = ({ searchParams, setSearchParams, pokemonCardFooter }) => {
 Pokedex.propTypes = {
     searchParams: PropTypes.string,
     setSearchParams: PropTypes.func,
-    pokemonCardFooter: PropTypes.element,
+    pokemonCardFooter: PropTypes.func,
 };
 
 export default Pokedex;

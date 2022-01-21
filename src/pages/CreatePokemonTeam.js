@@ -12,15 +12,16 @@ const CreatePokemonTeam = () => {
     const [team, setTeam] = useState([]);
 
     const onSubmit = (data) => {
+        data.pokemons = team;
         createTeam(data);
     };
 
-    const addToTeam = (pokemon) => {
+    const onAddToTeam = (pokemon) => {
         setTeam([...team, pokemon]);
     };
 
-    const removeFromTeam = (pokemon) => {
-        setTeam(team.filter((pokemonInArr) => pokemon.name === pokemonInArr.name));
+    const onRemoveFromTeam = (pokemon) => {
+        setTeam(team.filter((pokemonInArr) => pokemon.name !== pokemonInArr.name));
     };
 
     return (
@@ -50,14 +51,17 @@ const CreatePokemonTeam = () => {
                 </button>
             </form>
             <Pokedex
-                pokemonCardFooter={
-                    <ToggleTeamButton
-                        isInTeam={isPokemonInTeam}
-                        onRemoveFromTeam={removeFromTeam}
-                        onAddToTeam={addToTeam}
-                        pokemon={pokemon}
-                    />
-                }
+                pokemonCardFooter={(pokemon) => {
+                    return (
+                        <ToggleTeamButton
+                            team={team}
+                            setTeam={setTeam}
+                            pokemon={pokemon}
+                            onRemoveFromTeam={onRemoveFromTeam}
+                            onAddToTeam={onAddToTeam}
+                        />
+                    );
+                }}
             />
         </div>
     );

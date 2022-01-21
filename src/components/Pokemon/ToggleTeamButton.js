@@ -1,14 +1,14 @@
 import PropTypes from 'prop-types';
 import pokemonPropTypes from '../../propTypes/pokemonPropTypes';
 
-export default ToggleTeamButton = ({
-    isInTeam,
-    onRemoveFromTeam,
-    onAddToTeam,
-    pokemon,
-}) => {
-    return isInTeam === true ? (
+const ToggleTeamButton = ({ pokemon, team, onRemoveFromTeam, onAddToTeam }) => {
+    const isPokemonInTeam = (pokemon) => {
+        return !!team.find((pokemonInArr) => pokemonInArr.name === pokemon.name);
+    };
+
+    return isPokemonInTeam(pokemon) ? (
         <button
+            className="btn btn-error mt-2 w-full"
             onClick={(e) => {
                 e.nativeEvent.stopPropagation();
                 e.preventDefault();
@@ -19,6 +19,8 @@ export default ToggleTeamButton = ({
         </button>
     ) : (
         <button
+            disabled={team.length >= 6}
+            className="btn btn-primary mt-2 w-full"
             onClick={(e) => {
                 e.nativeEvent.stopPropagation();
                 e.preventDefault();
@@ -31,8 +33,10 @@ export default ToggleTeamButton = ({
 };
 
 ToggleTeamButton.propTypes = {
-    isInTeam: PropTypes.bool,
+    team: PropTypes.arrayOf(pokemonPropTypes),
+    pokemon: pokemonPropTypes,
     onRemoveFromTeam: PropTypes.func,
     onAddToTeam: PropTypes.func,
-    pokemon: pokemonPropTypes,
 };
+
+export default ToggleTeamButton;
